@@ -1,5 +1,5 @@
 # openfoam-cases
-This repository contains a set of benchmark problems each in a separate directory as a case that can be simulated by **`OpenFOAM`**. The cases are tested with **`OpenFOAM 9`**.
+This repository contains a set of benchmark problems each in a separate directory as a case that can be simulated by **`OpenFOAM`**. The cases are tested with **`OpenFOAM 8`**.
 
 Instead of using the built-in mesh generator of **`OpenFOAM`**, all cases use meshes generated from **`Gmsh`**. In this way, simulation results from other code can be compared with **`OpenFOAM`** using exactly the same mesh. The general steps of running these cases are:
 
