@@ -23,13 +23,12 @@ ddtSchemes
 gradSchemes
 {
     default         Gauss linear;
-    grad(p)         Gauss linear;
 }
 
 divSchemes
 {
     default         none;
-    div(phi,U)      Gauss linear;
+    div(phi,U)      bounded Gauss linearUpwindV grad(U);
     div((nuEff*dev2(T(grad(U))))) Gauss linear;
 }
 
