@@ -1,11 +1,19 @@
 # openfoam-cases
 This repository contains a set of benchmark problems each in a separate directory as a case that can be simulated by **`OpenFOAM`**. The cases are tested with **`OpenFOAM 8`**.
 
-Instead of using the built-in mesh generator of **`OpenFOAM`**, all cases use meshes generated from **`Gmsh`**. In this way, simulation results from other code can be compared with **`OpenFOAM`** using exactly the same mesh. The general steps of running these cases are:
+Instead of using the built-in mesh generator of **`OpenFOAM`**, all cases use meshes generated from **`Gmsh`** version **`4.4.1`** (but exported as **`Version 2 ASCII`** of the **`.msh`** format, otherwise **`OpenFOAM 8`** will have trouble converting them). In this way, simulation results from other code can be compared with **`OpenFOAM`** using exactly the same mesh. The companion **`.geo`** file that generated the mesh are included in the root directory.
 
-...
+The general steps of running these cases are:
 
-Each case has a companion **`PDF`** file in the root directory that captures the name of the **`OpenFOAM`** application used for the case and the corresponding simulation results.
+1. copy the case folder to the `run` folder of the `OpenFOAM` installation
+2. `cd` into the copied case folder
+3. execute `gmshToFoam <mesh-file-name.msh>`, where `<mesh-file-name.msh>` is the name of the mesh file contained in the case folder
+4. run `checkMesh` to make sure the mesh has been successfully converted by `OpenFOAM`
+5. run `renumberMesh`
+6. move files of `transportProperties`, `turbulenceProperties`, etc., to the generated `constant` folder
+7. move the `boundary` file to the generated `constant/polyMesh` folder, overwriting the existing one
+8. run the `OpenFOAM` application (`simpleFoam`, `icoFoam`, ..., etc.) as stated in the `/system/controlDict` file
+
 
 ## List of problems
 
