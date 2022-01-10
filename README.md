@@ -9,9 +9,9 @@ The general steps of running these cases are:
 2. `cd` into the copied case folder
 3. execute `gmshToFoam <mesh-file-name.msh>`, where `<mesh-file-name.msh>` is the name of the mesh file contained in the case folder
 4. run `checkMesh` to make sure the mesh has been successfully converted by `OpenFOAM`
-5. run `renumberMesh -overwrite`
-6. move files of `transportProperties`, `turbulenceProperties`, etc., to the generated `constant` folder
-7. move the `boundary` file, if exists, to the generated `constant/polyMesh` folder, overwriting the existing one
+5. move the `boundary` file, if exists, to the generated `constant/polyMesh` folder, overwriting the existing one
+6. run `renumberMesh -overwrite`
+7. move files of `transportProperties`, `turbulenceProperties`, etc., to the generated `constant` folder
 8. run the `OpenFOAM` application (`simpleFoam`, `icoFoam`, ..., etc.) as stated in the `/system/controlDict` file
 
 
