@@ -1,9 +1,9 @@
 /*--------------------------------*- C++ -*----------------------------------*\
-| =========                 |                                                 |
-| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
-|  \\    /   O peration     | Version:  4.1                                   |
-|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
-|    \\/     M anipulation  |                                                 |
+  =========                 |
+  \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
+   \\    /   O peration     | Website:  https://openfoam.org
+    \\  /    A nd           | Version:  8
+     \\/     M anipulation  |
 \*---------------------------------------------------------------------------*/
 FoamFile
 {
@@ -21,51 +21,53 @@ internalField   uniform (0 0 0);
 
 boundaryField
 {
+    roof
+    {
+        type            noSlip;
+    }
+
+    middleplane
+    {
+        type            symmetryPlane;
+    }
+
     inlet
     {
         type            codedFixedValue;
-        value           $internalField;
+        value           uniform (0 0 0); // initialize
         name            dummy;
-        
-        redirectType inletLaminarSquareProfil;
+
+        // see https://cfd-training.com/2018/05/07/non-uniform-inlet-profil-with-codedfixedvalue
+        redirectType    inletVelocityProfile;
         code
         #{
              const vectorField& Cf = patch().Cf(); 
 
              const scalar H	= 0.0052; 
-             const scalar Umax = 0.879542893; 
+             const scalar Umax  = 0.9;
 
              forAll(Cf, faceI) // loop over all the patch faces
              {
                 const scalar y = Cf[faceI].y() - 0.0049; 
-                (*this)[faceI] = vector(Umax*(4*y/H-4*sqr(y/H)), 0, 0);
+                // see https://farside.ph.utexas.edu/teaching/336L/Fluidhtml/node134.html
+                (*this)[faceI] = vector(Umax * 4 * y / H * (1 - y / H), 0, 0);
              }
-         #};
+        #};
+    }
+
+    endwall
+    {
+        type            noSlip;
+    }
+
+    floor
+    {
+        type            noSlip;
     }
 
     outlet
     {
-        type           zeroGradient;
-    }
-
-    roof
-    {
-        type           noSlip;
-    }
-    
-    floor
-    {
-        type           noSlip;
-    }
-    
-    endwall
-    {
-        type           noSlip;
-    }
-
-    middleplane
-    {
-        type           symmetryPlane;
+        type            zeroGradient;
     }
 }
 
