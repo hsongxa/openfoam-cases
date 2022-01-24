@@ -19,8 +19,8 @@ FoamFile
 (
     roof
     {
-        type            patch;
-        physicalType    patch;
+        type            wall;
+        physicalType    wall;
         nFaces          13800;
         startFace       1891340;
     }
@@ -39,15 +39,15 @@ FoamFile
     }
     endwall
     {
-        type            patch;
-        physicalType    patch;
+        type            wall;
+        physicalType    wall;
         nFaces          10660;
         startFace       1917360;
     }
     floor
     {
-        type            patch;
-        physicalType    patch;
+        type            wall;
+        physicalType    wall;
         nFaces          15240;
         startFace       1928020;
     }

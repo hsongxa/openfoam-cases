@@ -11,40 +11,48 @@ FoamFile
     format      ascii;
     class       volScalarField;
     location    "0";
-    object      p;
+    object      k;
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
 dimensions      [0 2 -2 0 0 0 0];
 
-internalField   uniform 0;
+internalField   uniform 0.00375;
 
 boundaryField
 {
     roof
     {
-        type            zeroGradient;
+        type            kqRWallFunction;
+        value           $internalField;
     }
+
+    floor
+    {
+        type            kqRWallFunction;
+        value           $internalField;
+    }
+
+    endwall
+    {
+        type            kqRWallFunction;
+        value           $internalField;
+    }
+    
     middleplane
     {
         type            symmetryPlane;
     }
+    
     inlet
     {
-        type            zeroGradient;
+        type            fixedValue;
+        value           $internalField;
     }
-    endwall
-    {
-        type            zeroGradient;
-    }
-    floor
-    {
-        type            zeroGradient;
-    }
+
     outlet
     {
-        type            fixedValue;
-        value           uniform 0;
+        type            zeroGradient;
     }
 }
 
