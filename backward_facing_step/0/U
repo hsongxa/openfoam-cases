@@ -25,26 +25,23 @@ boundaryField
     {
         type            noSlip;
     }
-
     middleplane
     {
         type            symmetryPlane;
     }
-
     inlet
     {
         type            codedFixedValue;
         value           uniform (0 0 0); // initialize
         name            dummy;
-
+        
         // see https://cfd-training.com/2018/05/07/non-uniform-inlet-profil-with-codedfixedvalue
-        redirectType    inletVelocityProfile;
         code
         #{
              const vectorField& Cf = patch().Cf(); 
 
              const scalar H	= 0.0052; 
-             const scalar Umax  = 0.9;
+             const scalar Umax  = 2.4; // case of Re = 1059 in the paper
 
              forAll(Cf, faceI) // loop over all the patch faces
              {
@@ -54,17 +51,14 @@ boundaryField
              }
         #};
     }
-
     endwall
     {
         type            noSlip;
     }
-
     floor
     {
         type            noSlip;
     }
-
     outlet
     {
         type            zeroGradient;

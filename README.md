@@ -35,6 +35,6 @@ The general steps of running these cases are:
 
 - ### flow around a cylinder
 
-  The 3D case of the problem of flow around a cylinder with square cross-section as documented in
+  The 3D case of the problem of flow around a cylinder with circular cross-section as documented in
 
   **M. Schäfer, S. Turek, F. Durst, E. Krause, and R. Rannacher, "Benchmark computations of laminar flow around a cylinder", *Flow Simulation with High-Performance Computers II*, 1996, 547-566**
